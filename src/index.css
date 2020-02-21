@@ -38,6 +38,11 @@ code {
     height: 300px;
 }
 
+.listBodyActive {
+    text-align: center;
+    min-height: 300px;
+}
+
 .formHeader {
     display: flex;
     justify-content: space-between;
@@ -63,18 +68,26 @@ code {
 }
 
 .formBody {
-    z-index: 1;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    height: 200%;
     padding: 5%;
     margin: 3%;
 }
 
-.listBodyItem {
-    text-align: center;
+.todo-footer {
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.MuiTabs-root {
+    display: flex;
+    overflow: hidden;
+    min-height: 48px;
+    color: grey;
+    -webkit-overflow-scrolling: touch;
+}
+
+.MuiTabs-centered {
     justify-content: center;
-    height: 300px;
+    border-bottom: 1px solid #e6e3e3;
 }
