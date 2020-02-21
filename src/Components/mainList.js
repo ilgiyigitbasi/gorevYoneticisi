@@ -35,39 +35,52 @@ class MainList extends Component {
         this.setState(prevState => ({listItem: [...this.state.listItem, items]}))
     };
     deleteItem = (i) => {
-        const listItem = this.state.listItem.filter((todo, todoIndex) => {
-            return todoIndex !== i
+        const listItem = this.state.listItem.filter(function (item) {
+            return item.id !== i
         });
         this.setState({listItem})
     };
 
     render() {
+        const filteredUsersGunluk = this.state.listItem.filter(function (fields) {
+            return fields.type === 'gunluk'
+        });
+        const filteredUsersAylik = this.state.listItem.filter(function (fields) {
+            return fields.type === 'aylik'
+        });
+        const filteredUsersHaftalik = this.state.listItem.filter(function (fields) {
+            return fields.type === 'haftalik'
+        });
         return (
             <div>
                 <Container className='container'>
                     <Paper elevation={1}>
-                        <div className='listHeader'><h3>Görevler</h3><IconButton
-                            title={'Yeni Görev Eklemek için Tıklayınız'} color="default" onClick={this.openForm}
-                            aria-label="add new duty"><MdAdd/>
+                        <div className='listHeader'><h3>Görevler</h3><IconButton style={{height: '50px', top: '5px'}}
+                                                                                 title={'Yeni Görev Eklemek için Tıklayınız'}
+                                                                                 color="default" onClick={this.openForm}
+                                                                                 aria-label="add new duty"><MdAdd/>
                         </IconButton></div>
                         {this.state.open &&
                         <AddForm onClose={this.onClose} open={this.state.open} sendDatas={this.formItems}/>}
                         <Tabs value={this.state.activePage}
                               indicatorColor="primary"
-                              textColor="default"
+                              textColor="inherit"
                               centered>
                             <Tab label="Günlük Görevler" value={1} onClick={() => this.setState({activePage: 1})}/>
                             <Tab label="Aylık Görevler" value={2} onClick={() => this.setState({activePage: 2})}/>
-                            <Tab label="Haftalık Görevler" value={3} onClick={() => this.setState({activePage: 3})}/>
+                            <Tab label="Yıllık Görevler" value={3} onClick={() => this.setState({activePage: 3})}/>
                         </Tabs>
                         <div className={this.state.listItem.length === 0 ? "listBody" : "listBodyActive"}>
-                            {this.state.listItem.length === 0 &&
-                            <div style={{fontSize: '15px', color: 'lightGray'}}>Hiç eklenmiş görev bulunmamaktadır,
+                            <div style={this.state.listItem.length === 0 ? {
+                                fontSize: '15px',
+                                color: 'lightGray'
+                            } : {display: 'none'}}>Hiç
+                                eklenmiş görev bulunmamaktadır,
                                 lütfen görev ekleyiniz
-                            </div>}
+                            </div>
                             <div className={this.state.listItem.length === 0 ? "listBodyItem" : "listBodyItemActive"}>
-                                {this.state.listItem[0]?.adi && this.activePage === 1 && this.state.listItem.map((item, i) =>
-                                    <ExpansionPanel key={item.adi}>
+                                {this.state.activePage === 1 && filteredUsersGunluk.map((item) =>
+                                    <ExpansionPanel key={item.adi} style={{margin: '5px'}}>
                                         <ExpansionPanelSummary
                                             expandIcon={<MdExpandMore/>}
                                             aria-controls="panel1a-content"
@@ -76,15 +89,59 @@ class MainList extends Component {
                                             <Typography>{item.adi}</Typography>
                                         </ExpansionPanelSummary>
                                         <ExpansionPanelDetails>
-                                            <Typography>
-                                                {item.aciklama}
-                                                {item.date}
+                                            <Typography style={{fontSize: '12px'}}>
+                                                <span>Açıklama: {item.aciklama}</span>
+                                                <span> Tarih: {item.date.split('T')[0]}</span>
+                                                <span> Saat: {item.date.split('T')[1]}</span>
                                             </Typography>
-                                            <div className="todo-footer">
-                                                <Button variant="contained" color="secondary"
-                                                        onClick={() => this.deleteItem(i)}>Sil</Button>
-                                            </div>
                                         </ExpansionPanelDetails>
+                                        <div className="todo-footer">
+                                            <Button variant="contained" color="secondary" style={{margin: '10px'}}
+                                                    onClick={() => this.deleteItem(item.id)}>Sil</Button>
+                                        </div>
+                                    </ExpansionPanel>
+                                )}{this.state.activePage === 2 && filteredUsersHaftalik.map((item,) =>
+                                <ExpansionPanel key={item.adi} style={{margin: '5px'}}>
+                                    <ExpansionPanelSummary
+                                        expandIcon={<MdExpandMore/>}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                    >
+                                        <Typography>{item.adi}</Typography>
+                                    </ExpansionPanelSummary>
+                                    <ExpansionPanelDetails>
+                                        <Typography style={{fontSize: '12px'}}>
+                                            <span>Açıklama: {item.aciklama}</span>
+                                            <span> Tarih: {item.date?.split('T')[0]}</span>
+                                            <span> Saat: {item.date?.split('T')[1]}</span>
+                                        </Typography>
+                                    </ExpansionPanelDetails>
+                                    <div className="todo-footer">
+                                        <Button variant="contained" color="secondary" style={{margin: '10px'}}
+                                                onClick={() => this.deleteItem(item.id)}>Sil</Button>
+                                    </div>
+                                </ExpansionPanel>
+                            )}
+                                {this.state.activePage === 3 && filteredUsersAylik.map((item, id) =>
+                                    <ExpansionPanel key={item.adi} style={{margin: '5px'}}>
+                                        <ExpansionPanelSummary
+                                            expandIcon={<MdExpandMore/>}
+                                            aria-controls="panel1a-content"
+                                            id="panel1a-header"
+                                        >
+                                            <Typography>{item.adi}</Typography>
+                                        </ExpansionPanelSummary>
+                                        <ExpansionPanelDetails>
+                                            <Typography style={{fontSize: '12px'}}>
+                                                <span>Açıklama: {item.aciklama}</span>
+                                                <span> Tarih: {item.date?.split('T')[0]}</span>
+                                                <span> Saat: {item.date?.split('T')[1]}</span>
+                                            </Typography>
+                                        </ExpansionPanelDetails>
+                                        <div className="todo-footer">
+                                            <Button variant="contained" color="secondary" style={{margin: '10px'}}
+                                                    onClick={() => this.deleteItem(id)}>Sil</Button>
+                                        </div>
                                     </ExpansionPanel>
                                 )}
                             </div>
