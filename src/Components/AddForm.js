@@ -68,6 +68,7 @@ class AddForm extends Component {
                     <Fade in={this.props.open}>
                         <Paper elevation={1}>
                             <div className='formHeader'><h3>Görev Ekle</h3><IconButton
+                                style={{height: '50px', top: '5px'}}
                                 title={'Çıkış'} color="default" onClick={this.onClose}
                                 aria-label="add new duty"><MdClose/>
                             </IconButton></div>
