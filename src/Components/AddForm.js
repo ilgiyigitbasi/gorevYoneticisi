@@ -41,18 +41,9 @@ class AddForm extends Component {
             }
         });
     };
-    handleDateChange = (evt) => {
-        let val = evt.target.value;
-        this.setState({
-            data: {
-                ...this.state.data,
-                date: val,
-            }
-        });
-        console.log(this.state.data.date)
-    };
     sendData = () => {
         this.props.sendDatas(this.state.data);
+        this.onClose()
     };
 
     render() {
@@ -105,12 +96,13 @@ class AddForm extends Component {
                                 <FormLabel component="legend">Görevin Türü</FormLabel>
                                 <RadioGroup defaultValue="gunluk" aria-label="Görev Türü" name="type"
                                             onChange={val => this.handleChange(val)}>
-                                    <FormControlLabel value="gunluk" control={<Radio/>} label="Günlük"/>
-                                    <FormControlLabel value="haftalik" control={<Radio/>} label="Haftalık"/>
-                                    <FormControlLabel value="aylik" control={<Radio/>} label="Aylık"/>
+                                    <FormControlLabel value="gunluk" control={<Radio color="primary"/>} label="Günlük"/>
+                                    <FormControlLabel value="haftalik" control={<Radio color="primary"/>}
+                                                      label="Haftalık"/>
+                                    <FormControlLabel value="aylik" control={<Radio color="primary"/>} label="Aylık"/>
                                 </RadioGroup>
                                 <div className="todo-footer">
-                                    <Button variant="contained" color="primary" style={{marginTop: '10px'}}
+                                    <Button variant="contained" color="primary" style={{marginTop: '5%'}}
                                             onClick={this.sendData}>
                                         Ekle
                                     </Button>

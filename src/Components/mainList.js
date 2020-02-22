@@ -70,9 +70,12 @@ class MainList extends Component {
                               indicatorColor="primary"
                               textColor="inherit"
                               centered>
-                            <Tab label="Günlük Görevler" value={1} onClick={() => this.setState({activePage: 1})}/>
-                            <Tab label="Haftalık Görevler" value={2} onClick={() => this.setState({activePage: 2})}/>
-                            <Tab label="Aylık Görevler" value={3} onClick={() => this.setState({activePage: 3})}/>
+                            <Tab label={"Günlük Görevler " + '(' + filteredUsersGunluk.length + ')'} value={1}
+                                 onClick={() => this.setState({activePage: 1})}/>
+                            <Tab label={"Haftalık Görevler " + '(' + filteredUsersHaftalik.length + ')'} value={2}
+                                 onClick={() => this.setState({activePage: 2})}/>
+                            <Tab label={"Aylık Görevler " + '(' + filteredUsersAylik.length + ')'} value={3}
+                                 onClick={() => this.setState({activePage: 3})}/>
                         </Tabs>
                         <div className={this.state.listItem.length === 0 ? "listBody" : "listBodyActive"}>
                             <div style={this.state.listItem.length === 0 ? {
@@ -92,12 +95,22 @@ class MainList extends Component {
                                         >
                                             <Typography>{item.adi}</Typography>
                                         </ExpansionPanelSummary>
-                                        <ExpansionPanelDetails>
-                                            <Typography style={{fontSize: '12px'}}>
-                                                <span>Açıklama: {item.aciklama}</span><br/>
-                                                <span> Tarih: {item.date.split('T')[0]}</span><br/>
-                                                <span> Saat: {item.date.split('T')[1]}</span>
-                                            </Typography>
+                                        <ExpansionPanelDetails style={{flexDirection: "column"}}> <Typography
+                                            color="textSecondary"
+                                            style={{
+                                                margin: '15px',
+                                                fontSize: '12px'
+                                            }}>Açıklama: {item.aciklama}</Typography>
+                                            <Typography color="textSecondary"
+                                                        style={{
+                                                            margin: '15px',
+                                                            fontSize: '12px'
+                                                        }}>Tarih: {item.date?.split('T')[0]}</Typography>
+                                            <Typography color="textSecondary"
+                                                        style={{
+                                                            margin: '15px',
+                                                            fontSize: '12px'
+                                                        }}> Saat:{item.date?.split('T')[1]}</Typography>
                                         </ExpansionPanelDetails>
                                         <div className="todo-footer">
                                             <Button variant="contained" color="secondary" style={{margin: '10px'}}
@@ -114,11 +127,21 @@ class MainList extends Component {
                                         <Typography>{item.adi}</Typography>
                                     </ExpansionPanelSummary>
                                     <ExpansionPanelDetails style={{flexDirection: "column"}}> <Typography
-                                        style={{margin: '15px'}}>Açıklama: {item.aciklama}</Typography>
-                                        <Typography
-                                            style={{margin: '15px'}}>Tarih: {item.date?.split('T')[0]}</Typography>
-                                        <Typography
-                                            style={{margin: '15px'}}> Saat:{item.date?.split('T')[1]}</Typography>
+                                        color="textSecondary"
+                                        style={{
+                                            margin: '15px',
+                                            fontSize: '12px'
+                                        }}>Açıklama: {item.aciklama}</Typography>
+                                        <Typography color="textSecondary"
+                                                    style={{
+                                                        margin: '15px',
+                                                        fontSize: '12px'
+                                                    }}>Tarih: {item.date?.split('T')[0]}</Typography>
+                                        <Typography color="textSecondary"
+                                                    style={{
+                                                        margin: '15px',
+                                                        fontSize: '12px'
+                                                    }}> Saat:{item.date?.split('T')[1]}</Typography>
                                     </ExpansionPanelDetails>
                                     < div className="todo-footer">
                                         <Button variant="contained" color="secondary" style={{margin: '10px'}}
@@ -135,12 +158,22 @@ class MainList extends Component {
                                         >
                                             <Typography>{item.adi}</Typography>
                                         </ExpansionPanelSummary>
-                                        <ExpansionPanelDetails>
-                                            <Typography style={{fontSize: '12px'}}>
-                                                <span>Açıklama: {item.aciklama}</span><br/>
-                                                <span> Tarih: {item.date?.split('T')[0]}</span><br/>
-                                                <span> Saat: {item.date?.split('T')[1]}</span>
-                                            </Typography>
+                                        <ExpansionPanelDetails style={{flexDirection: "column"}}> <Typography
+                                            color="textSecondary"
+                                            style={{
+                                                margin: '15px',
+                                                fontSize: '12px'
+                                            }}>Açıklama: {item.aciklama}</Typography>
+                                            <Typography color="textSecondary"
+                                                        style={{
+                                                            margin: '15px',
+                                                            fontSize: '12px'
+                                                        }}>Tarih: {item.date?.split('T')[0]}</Typography>
+                                            <Typography color="textSecondary"
+                                                        style={{
+                                                            margin: '15px',
+                                                            fontSize: '12px'
+                                                        }}> Saat:{item.date?.split('T')[1]}</Typography>
                                         </ExpansionPanelDetails>
                                         <div className="todo-footer">
                                             <Button variant="contained" color="secondary" style={{margin: '10px'}}
