@@ -41,6 +41,10 @@ class MainList extends Component {
         this.setState({listItem})
     };
 
+    componentWillMount() {
+        document.title = 'Görev Yöneticisi'
+    };
+
     render() {
         const filteredUsersGunluk = this.state.listItem.filter(function (fields) {
             return fields.type === 'gunluk'
